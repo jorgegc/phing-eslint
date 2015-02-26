@@ -1,0 +1,11 @@
+{
+    "name": "jorgegc/phing-eslint",
+    "description": "A collection of targets for ESLint.",
+    "type": "library",
+    "keywords": [
+        "phing",
+        "eslint"
+    ],
+    "license": "GPL-2.0+",
+    "minimum-stability": "dev"
+}

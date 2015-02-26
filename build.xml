@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="eslint" default="eslint:check-dir">
+
+  <!-- ## Properties -->
+
+  <property name="eslint.bin"        value="/usr/local/bin/eslint" />
+  <property name="eslint.cmd"        value="${eslint.bin}" />
+  <property name="eslint.files.dir"  value="" />
+  <property name="eslint.report.dir" value="" />
+
+  <!-- ## Targets -->
+
+  <target name="eslint:check-dir"
+          description="Checks code against ESLint.">
+    <fail unless="eslint.files.dir"
+          message="Please provide an eslint.files.dir property." />
+
+    <foreach target="eslint:check-file" param="filename" absparam="absfilename">
+      <fileset dir="${eslint.files.dir}">
+        <include name="**/*.js" />
+        <exclude name="**/*.min.js" />
+      </fileset>
+    </foreach>
+  </target>
+
+  <target name="eslint:check-file"
+          description="ESLint a single file.">
+    <fail unless="eslint.report.dir"
+          message="Please provide an eslint.report.dir property." />
+
+    <echo msg="Linting file: ${absfilename}" />
+
+    <exec command="${eslint.cmd} --format checkstyle ${absfilename}"
+          outputProperty="eslint.report.output" />
+
+    <php function="str_replace" returnProperty="eslint.report.filename">
+      <param value="/" />
+      <param value="-" />
+      <param value="${filename}" />
+    </php>
+
+    <property name="eslint.report.file" value="${eslint.report.dir}/checkstyle-eslint-${eslint.report.filename}.xml" />
+    <append text="${eslint.report.output}" destFile="${eslint.report.file}" />
+
+    <property name="eslint.break.errors" value="${eslint.report.output}">
+      <filterchain>
+        <linecontainsregexp>
+          <regexp pattern='(severity="error")' ignoreCase="true" />
+        </linecontainsregexp>
+      </filterchain>
+    </property>
+
+    <if>
+      <not>
+        <equals arg1="${eslint.break.errors}" arg2="" />
+      </not>
+      <then>
+        <fail message="JS error detected in file ${absfilename}." />
+      </then>
+    </if>
+  </target>
+
+</project>
