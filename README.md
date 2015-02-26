@@ -3,7 +3,7 @@ Phing ESLint
 
 ## Overview
 
-A collection of targets for ESLint.
+A collection of ESLint targets for Phing.
 
 ## Installation
 

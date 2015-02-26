@@ -1,6 +1,6 @@
 {
     "name": "jorgegc/phing-eslint",
-    "description": "A collection of targets for ESLint.",
+    "description": "A collection of ESLint targets for Phing.",
     "type": "library",
     "keywords": [
         "phing",
