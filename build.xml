@@ -11,8 +11,21 @@
 
   <!-- ## Targets -->
 
+  <target name="eslint:init"
+          description="Creates the ESLint report folder."
+          unless="eslint.initialized"
+          hidden="true">
+    <fail unless="eslint.report.dir"
+          message="Please provide an eslint.report.dir property." />
+
+    <mkdir dir="${eslint.report.dir}" />
+
+    <property name="eslint.initialized" value="true" />
+  </target>
+
   <target name="eslint:check-dir"
-          description="Checks code against ESLint.">
+          description="Checks code against ESLint."
+          depends="eslint:init">
     <fail unless="eslint.files.dir"
           message="Please provide an eslint.files.dir property." />
 
@@ -25,7 +38,8 @@
   </target>
 
   <target name="eslint:check-file"
-          description="ESLint a single file.">
+          description="ESLint a single file."
+          depends="eslint:init">
     <fail unless="eslint.report.dir"
           message="Please provide an eslint.report.dir property." />
 
