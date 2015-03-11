@@ -4,8 +4,6 @@
 
   <!-- ## Properties -->
 
-  <property name="eslint.bin"        value="/usr/local/bin/eslint" />
-  <property name="eslint.cmd"        value="${eslint.bin}" />
   <property name="eslint.files.dir"  value="" />
   <property name="eslint.report.dir" value="" />
 
@@ -45,7 +43,7 @@
 
     <echo msg="Linting file: ${absfilename}" />
 
-    <exec command="${eslint.cmd} --format checkstyle ${absfilename}"
+    <exec command="eslint --format checkstyle ${absfilename}"
           outputProperty="eslint.report.output" />
 
     <php function="str_replace" returnProperty="eslint.report.filename">
