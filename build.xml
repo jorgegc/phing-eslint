@@ -5,19 +5,15 @@
   <!-- ## Properties -->
 
   <property name="eslint.files.dir"  value="" />
-  <property name="eslint.report.dir" value="" />
+  <property name="eslint.report.dir" value="${project.basedir}/build/logs/eslint" />
 
   <!-- ## Targets -->
 
   <target name="eslint:init"
-          description="Creates the ESLint report folder."
+          description="Setup steps for ESLint build tasks."
           unless="eslint.initialized"
           hidden="true">
-    <fail unless="eslint.report.dir"
-          message="Please provide an eslint.report.dir property." />
-
     <mkdir dir="${eslint.report.dir}" />
-
     <property name="eslint.initialized" value="true" />
   </target>
 
@@ -38,9 +34,6 @@
   <target name="eslint:check-file"
           description="ESLint a single file."
           depends="eslint:init">
-    <fail unless="eslint.report.dir"
-          message="Please provide an eslint.report.dir property." />
-
     <echo msg="Linting file: ${absfilename}" />
 
     <exec command="eslint --format checkstyle ${absfilename}"
