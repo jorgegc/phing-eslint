@@ -22,7 +22,6 @@
           depends="eslint:init">
     <fail unless="eslint.files.dir"
           message="Please provide an eslint.files.dir property." />
-
     <foreach target="eslint:check-file" param="filename" absparam="absfilename">
       <fileset dir="${eslint.files.dir}">
         <include name="**/*.js" />
