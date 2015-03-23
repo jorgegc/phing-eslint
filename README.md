@@ -9,8 +9,6 @@ A collection of ESLint targets for Phing.
 
 This project can be checked out with Composer.
 
-Please note that this project assumes that ESLint is installed globally via npm.
-
 ```
 "require": {
     "jorgegc/phing-eslint": "*"
