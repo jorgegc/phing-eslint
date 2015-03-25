@@ -36,7 +36,7 @@
           depends="eslint:init">
     <echo msg="Linting file: ${absfilename}" />
 
-    <exec command="${eslint.bin} --format checkstyle ${absfilename}"
+    <exec command="${eslint.bin} --format junit ${absfilename}"
           outputProperty="eslint.report.output" />
 
     <php function="str_replace" returnProperty="eslint.report.filename">
@@ -45,25 +45,8 @@
       <param value="${filename}" />
     </php>
 
-    <property name="eslint.report.file" value="${eslint.report.dir}/checkstyle-eslint-${eslint.report.filename}.xml" />
-    <append text="${eslint.report.output}" destFile="${eslint.report.file}" />
-
-    <property name="eslint.break.errors" value="${eslint.report.output}">
-      <filterchain>
-        <linecontainsregexp>
-          <regexp pattern='(severity="error")' ignoreCase="true" />
-        </linecontainsregexp>
-      </filterchain>
-    </property>
-
-    <if>
-      <not>
-        <equals arg1="${eslint.break.errors}" arg2="" />
-      </not>
-      <then>
-        <fail message="JS error detected in file ${absfilename}." />
-      </then>
-    </if>
+    <append text="${eslint.report.output}"
+            destFile="${eslint.report.dir}/eslint-${eslint.report.filename}.xml" />
   </target>
 
 </project>
