@@ -1,12 +1,12 @@
 {
-  "name": "Phing ESLint",
-  "version": "0.0.1",
-  "description": "A collection of ESLint targets for Phing.",
-  "dependencies": {},
-  "devDependencies": {
-    "eslint": "~0.17.0"
-  },
-  "engines": {
-    "node": ">=0.8.0"
-  }
+    "name": "Phing ESLint",
+    "version": "0.0.1",
+    "description": "A collection of ESLint targets for Phing.",
+    "dependencies": {},
+    "devDependencies": {
+        "eslint": "~0.17.0"
+    },
+    "engines": {
+        "node": ">=0.8.0"
+    }
 }
