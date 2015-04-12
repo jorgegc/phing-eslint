@@ -10,17 +10,17 @@
 
   <!-- ## Targets -->
 
-  <target name="eslint:init"
-          description="Setup steps for ESLint build tasks."
-          unless="eslint.initialized"
-          hidden="true">
-    <mkdir dir="${eslint.report.dir}" />
-    <property name="eslint.initialized" value="true" />
-  </target>
-
   <target name="eslint:check-dir"
-          description="Checks code against ESLint."
-          depends="eslint:init">
+          description="Checks code against ESLint.">
+    <if>
+      <equals arg1="${eslint.files.dir}" arg2="" />
+      <then>
+        <fail message="Please provide an eslint.files.dir property." />
+      </then>
+    </if>
+
+    <mkdir dir="${eslint.report.dir}" />
+
     <foreach target="eslint:check-file" param="filename" absparam="absfilename">
       <fileset dir="${eslint.files.dir}">
         <include name="**/*.js" />
@@ -32,8 +32,6 @@
   <target name="eslint:check-file"
           description="ESLint a single file."
           hidden="true">
-    <echo msg="Linting file: ${absfilename}" />
-
     <exec command="${eslint.bin} --format junit ${absfilename}"
           outputProperty="eslint.report.output" />
 
