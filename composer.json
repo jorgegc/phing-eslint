@@ -1,11 +1,14 @@
 {
     "name": "jorgegc/phing-eslint",
     "description": "A collection of ESLint targets for Phing.",
-    "type": "library",
     "keywords": [
         "phing",
         "eslint"
     ],
+    "homepage": "https://github.com/jorgegc/phing-eslint",
     "license": "GPL-2.0+",
-    "minimum-stability": "dev"
+    "support": {
+        "issues": "https://github.com/jorgegc/phing-eslint",
+        "source": "https://github.com/jorgegc/phing-eslint"
+    }
 }
